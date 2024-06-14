@@ -25,23 +25,27 @@
 			<option value="det100a">DET100A (320 - 1100 nm)</option>
 		</select><br><br>
 		<label>Wavelength:<br>
-			<input type="text" name="wavelength"></label>
+			<input type="text" name="wavelength"></label><br>
 			<label>
 				<input type="radio" name="wlunit" value="nm">nm</label>
 			<label>
 				<input type="radio" name="wlunit" value="um">um</label>
 		<br>
 		<label>Load resisance (Ohm):<br>
-			<input type="text" name="resistance"></label>
+			<input type="text" name="resistance"></label><br>
 			<label>
 				<input type="radio" name="runit" value="Ohm">Ohm</label>
 			<label>
-				<input type="radio" name="wlunit" value="kOhm">kOhm</label>
+				<input type="radio" name="runit" value="kOhm">kOhm</label>
 			<label>
-				<input type="radio" name="wlunit" value="MOhm">MOhm</label>
+				<input type="radio" name="runit" value="MOhm">MOhm</label>
 		<br>
 		<label>Volage (V):<br>
-			<input type="text" name="voltage"></label><br><br>
+			<input type="text" name="voltage"></label><br>
+	    		<label>
+				<input type="radio" name="vunit" value="mV">mV</label>
+			<label>
+				<input type="radio" name="vunit" value="mV">mV</label><br><br>
         <input type="submit" value="Calculate Power">
     </form>
 	<?php
