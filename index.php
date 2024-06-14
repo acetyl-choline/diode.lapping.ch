@@ -27,9 +27,9 @@
 		<label>Wavelength:<br>
 			<input type="text" name="wavelength" value=<?php echo file_get_contents("wavelength.log");?>></label><br>
 			<label>
-				<input type="radio" name="wlunit" value="1" checked=<?php (file_get_contents("wlunit.log") == 1) ? echo "checked" : echo "unchecked";?>>nm</label>
+				<input type="radio" name="wlunit" value="1" checked=<?php (floatvar(file_get_contents("wlunit.log")) == 1) ? echo "checked" : echo "unchecked";?>>nm</label>
 			<label>
-				<input type="radio" name="wlunit" value="1000" checked=<?php (file_get_contents("wlunit.log") == 1000) ? echo "checked" : echo "unchecked";?>>um</label>
+				<input type="radio" name="wlunit" value="1000" checked=<?php (floatvar(file_get_contents("wlunit.log")) == 1000) ? echo "checked" : echo "unchecked";?>>um</label>
 		<br>
 		<label>Load resisance (Ohm):<br>
 			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
