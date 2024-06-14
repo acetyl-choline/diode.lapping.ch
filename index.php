@@ -127,7 +127,7 @@
 			
 			file_put_contents("result.log", $result);
 		}
-		header('Location: http://diode.lapping.ch');
+		header('Location: https://diode.lapping.ch');
   		exit;
  	?>
 </body>
