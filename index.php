@@ -48,6 +48,7 @@
 				<input type="radio" name="vunit" value="1" <?php echo (file_get_contents("vunit.log") == 1) ? "checked" : "";?>>V</label><br><br>
         <input type="submit" value="Calculate Power">
     </form>
+	<?php echo file_get_contents("result.log");?>
 	<?php
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$detector = $_POST["detector"];
@@ -126,6 +127,8 @@
 			
 			file_put_contents("result.log", $result);
 		}
+		header('Location: http://diode.lapping.ch');
+  		exit;
  	?>
 </body>
 </html>
