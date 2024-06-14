@@ -27,33 +27,36 @@
 		<label>Wavelength:<br>
 			<input type="text" name="wavelength"></label><br>
 			<label>
-				<input type="radio" name="wlunit" value="nm" checked>nm</label>
+				<input type="radio" name="wlunit" value="1" checked>nm</label>
 			<label>
-				<input type="radio" name="wlunit" value="um">um</label>
+				<input type="radio" name="wlunit" value="1000">um</label>
 		<br>
 		<label>Load resisance (Ohm):<br>
 			<input type="text" name="resistance"></label><br>
 			<label>
-				<input type="radio" name="runit" value="Ohm" checked>Ohm</label>
+				<input type="radio" name="runit" value="1" checked>Ohm</label>
 			<label>
-				<input type="radio" name="runit" value="kOhm">kOhm</label>
+				<input type="radio" name="runit" value="1000">kOhm</label>
 			<label>
-				<input type="radio" name="runit" value="MOhm">MOhm</label>
+				<input type="radio" name="runit" value="1000000">MOhm</label>
 		<br>
 		<label>Volage (V):<br>
 			<input type="text" name="voltage"></label><br>
 	    		<label>
-				<input type="radio" name="vunit" value="mV" checked>mV</label>
+				<input type="radio" name="vunit" value="0.001" checked>mV</label>
 			<label>
-				<input type="radio" name="vunit" value="V">V</label><br><br>
+				<input type="radio" name="vunit" value="1">V</label><br><br>
         <input type="submit" value="Calculate Power">
     </form>
 	<?php
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$detector = $_POST["detector"];
-			$wavelength = floatval($_POST["wavelength"]);
-			$resistance = floatval($_POST["resistance"]);
-			$voltage = floatval($_POST["voltage"]);
+			$wlunit = floatval($_POST["wlunit]);
+			$wavelength = floatval($_POST["wavelength"]) * $wlunit;
+			$runit = floatval($_POST["runit]);
+			$resistance = floatval($_POST["resistance"]) * $runit;
+			$vunit = floatval($_POST["vunit]);
+			$voltage = floatval($_POST["voltage"]) * $vunit;
 			
 			// Import csv
 			$csvFile = $detector . ".csv";
