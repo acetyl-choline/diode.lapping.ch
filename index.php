@@ -27,14 +27,14 @@
 		<label>Wavelength:<br>
 			<input type="text" name="wavelength"></label><br>
 			<label>
-				<input type="radio" name="wlunit" value="nm">nm</label>
+				<input type="radio" name="wlunit" value="nm" checked>nm</label>
 			<label>
 				<input type="radio" name="wlunit" value="um">um</label>
 		<br>
 		<label>Load resisance (Ohm):<br>
 			<input type="text" name="resistance"></label><br>
 			<label>
-				<input type="radio" name="runit" value="Ohm">Ohm</label>
+				<input type="radio" name="runit" value="Ohm" checked>Ohm</label>
 			<label>
 				<input type="radio" name="runit" value="kOhm">kOhm</label>
 			<label>
@@ -43,9 +43,9 @@
 		<label>Volage (V):<br>
 			<input type="text" name="voltage"></label><br>
 	    		<label>
-				<input type="radio" name="vunit" value="mV">mV</label>
+				<input type="radio" name="vunit" value="mV" checked>mV</label>
 			<label>
-				<input type="radio" name="vunit" value="mV">mV</label><br><br>
+				<input type="radio" name="vunit" value="V">V</label><br><br>
         <input type="submit" value="Calculate Power">
     </form>
 	<?php
