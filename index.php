@@ -116,13 +116,15 @@
 			
 			// Print power
 			if ($power >= 1)
-				echo number_format($power, 3) . " W";
+				$result=number_format($power, 3) . " W";
 			elseif ($power >= 0.001)
-				echo number_format($power * 1000, 3) . " mW";
+				$result=number_format($power * 1000, 3) . " mW";
 			elseif ($power >= 0.000001)
-				echo number_format($power * 1000000, 3) . " uW";
+				$result=number_format($power * 1000000, 3) . " uW";
 			else
-				echo number_format($power * 1000000000, 3) . " nW";
+				$result=number_format($power * 1000000000, 3) . " nW";
+			
+			file_put_contents("result.log", $result);
 		}
  	?>
 </body>
