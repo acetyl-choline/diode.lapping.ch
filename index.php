@@ -34,29 +34,42 @@
 		<label>Load resisance (Ohm):<br>
 			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
 			<label>
-				<input type="radio" name="runit" value="1" checked>Ohm</label>
+				<input type="radio" name="runit" value="1" <?php echo (file_get_contents("runit.log") == 1) ? "checked" : "";?>>Ohm</label>
 			<label>
-				<input type="radio" name="runit" value="1000">kOhm</label>
+				<input type="radio" name="runit" value="1000" <?php echo (file_get_contents("runit.log") == 1000) ? "checked" : "";?>>kOhm</label>
 			<label>
-				<input type="radio" name="runit" value="1000000">MOhm</label>
+				<input type="radio" name="runit" value="1000000" <?php echo (file_get_contents("runit.log") == 1000000) ? "checked" : "";?>>MOhm</label>
 		<br>
 		<label>Volage (V):<br>
 			<input type="text" name="voltage" value=<?php echo file_get_contents("voltage.log");?>></label><br>
 	    		<label>
-				<input type="radio" name="vunit" value="1000" checked>mV</label>
+				<input type="radio" name="vunit" value="1000" <?php echo (file_get_contents("vunit.log") == 1000) ? "checked" : "";?>>mV</label>
 			<label>
-				<input type="radio" name="vunit" value="1">V</label><br><br>
+				<input type="radio" name="vunit" value="1" <?php echo (file_get_contents("vunit.log") == 1) ? "checked" : "";?>>V</label><br><br>
         <input type="submit" value="Calculate Power">
     </form>
 	<?php
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$detector = $_POST["detector"];
 			$wlunit = floatval($_POST["wlunit"]);
-			$wavelength = floatval($_POST["wavelength"]) * $wlunit;
+			$wavelength = floatval($_POST["wavelength"]);
 			$runit = floatval($_POST["runit"]);
-			$resistance = floatval($_POST["resistance"]) * $runit;
+			$resistance = floatval($_POST["resistance"]);
 			$vunit = floatval($_POST["vunit"]);
-			$voltage = floatval($_POST["voltage"]) / $vunit;
+			$voltage = floatval($_POST["voltage"]);
+
+			// Save values
+			file_put_contents("detector.log", $detector);
+			file_put_contents("wlunit.log", $wlunit);
+			file_put_contents("wavelength.log", $wavelength);
+			file_put_contents("runit.log", $runit);
+			file_put_contents("resistance.log", $resistance);
+			file_put_contents("vunit.log", $vunit);
+			file_put_contents("voltage.log", $voltage);
+
+			$wavelength = $wavelength * $wlunit;
+			$resistance = $resistance * $runit;
+			$voltage = $voltage / $vunit;
 			
 			// Import csv
 			$csvFile = $detector . ".csv";
@@ -71,15 +84,6 @@
 			// Perform spline interpolation
 			//$spline = new Splines($xValues, $yValues);
 			//$responsivity = $spline->interpolate($wavelength);
-
-			// Save values
-			file_put_contents("detector.log", $detector);
-			file_put_contents("wlunit.log", $wlunit);
-			file_put_contents("wavelength.log", $wavelength);
-			file_put_contents("runit.log", $runit);
-			file_put_contents("resistance.log", $resistance);
-			file_put_contents("vunit.log", $vunit);
-			file_put_contents("voltage.log", $voltage);
 			
 			// Perform linear interpolation
 			$i = 0;
