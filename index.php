@@ -27,9 +27,9 @@
 		<label>Wavelength:<br>
 			<input type="text" name="wavelength" value=<?php echo file_get_contents("wavelength.log");?>></label><br>
 			<label>
-				<input type="radio" name="wlunit" value="1" checked>nm</label>
+				<input type="radio" name="wlunit" value="1" checked=<?php (file_get_contents("wlunit.log") == 1) ? echo "checked" : echo "unchecked";?>>nm</label>
 			<label>
-				<input type="radio" name="wlunit" value="1000">um</label>
+				<input type="radio" name="wlunit" value="1000" checked=<?php (file_get_contents("wlunit.log") == 1000) ? echo "checked" : echo "unchecked";?>>um</label>
 		<br>
 		<label>Load resisance (Ohm):<br>
 			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
@@ -71,6 +71,14 @@
 			// Perform spline interpolation
 			//$spline = new Splines($xValues, $yValues);
 			//$responsivity = $spline->interpolate($wavelength);
+
+			// Save values
+			file_put_contents(detector.log, $detector);
+			file_put_contents(wlunit.log, wlunit);
+			file_put_contents(wavelength.log, wavelength);
+			file_put_contents(runit.log, runit);
+			file_put_contents(vunit.log, vunit);
+			file_put_contents(voltage.log, voltage);
 			
 			// Perform linear interpolation
 			$i = 0;
