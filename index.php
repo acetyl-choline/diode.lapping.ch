@@ -25,14 +25,14 @@
 			<option value="det100a">DET100A (320 - 1100 nm)</option>
 		</select><br><br>
 		<label>Wavelength:<br>
-			<input type="text" name="wavelength" value=<?php echo array_map('str_getcsv', file("wavelength.log"))[0];?>></label><br>
+			<input type="text" name="wavelength" value=<?php echo file_get_contents("wavelength.log");?>></label><br>
 			<label>
 				<input type="radio" name="wlunit" value="1" checked>nm</label>
 			<label>
 				<input type="radio" name="wlunit" value="1000">um</label>
 		<br>
 		<label>Load resisance (Ohm):<br>
-			<input type="text" name="resistance" value=<?php echo array_map('str_getcsv', file("resistance.log"))[0];?>></label><br>
+			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
 			<label>
 				<input type="radio" name="runit" value="1" checked>Ohm</label>
 			<label>
@@ -41,7 +41,7 @@
 				<input type="radio" name="runit" value="1000000">MOhm</label>
 		<br>
 		<label>Volage (V):<br>
-			<input type="text" name="voltage" value=<?php echo array_map('str_getcsv', file("voltage.log"))[0];?>></label><br>
+			<input type="text" name="voltage" value=<?php echo file_get_contents("voltage.log");?>></label><br>
 	    		<label>
 				<input type="radio" name="vunit" value="1000" checked>mV</label>
 			<label>
