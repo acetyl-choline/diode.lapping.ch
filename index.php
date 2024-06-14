@@ -43,7 +43,7 @@
 		<label>Volage (V):<br>
 			<input type="text" name="voltage"></label><br>
 	    		<label>
-				<input type="radio" name="vunit" value="0.001" checked>mV</label>
+				<input type="radio" name="vunit" value="1000" checked>mV</label>
 			<label>
 				<input type="radio" name="vunit" value="1">V</label><br><br>
         <input type="submit" value="Calculate Power">
@@ -51,12 +51,12 @@
 	<?php
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$detector = $_POST["detector"];
-			$wlunit = floatval($_POST["wlunit]);
+			$wlunit = floatval($_POST["wlunit"]);
 			$wavelength = floatval($_POST["wavelength"]) * $wlunit;
-			$runit = floatval($_POST["runit]);
+			$runit = floatval($_POST["runit"]);
 			$resistance = floatval($_POST["resistance"]) * $runit;
-			$vunit = floatval($_POST["vunit]);
-			$voltage = floatval($_POST["voltage"]) * $vunit;
+			$vunit = floatval($_POST["vunit"]);
+			$voltage = floatval($_POST["voltage"]) / $vunit;
 			
 			// Import csv
 			$csvFile = $detector . ".csv";
