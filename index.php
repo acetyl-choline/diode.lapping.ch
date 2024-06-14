@@ -34,11 +34,11 @@
 		<label>Load resisance (Ohm):<br>
 			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
 			<label>
-				<input type="radio" name="runit" value="1" <?php echo (file_get_contents("runit.log") == 1) ? "checked" : "";?>>Ohm</label>
+				<input type="radio" name="runit" value="1" <?php echo (file_get_contents("runit.log") == 1) ? "checked" : "";?>>&#x3A8</label>
 			<label>
-				<input type="radio" name="runit" value="1000" <?php echo (file_get_contents("runit.log") == 1000) ? "checked" : "";?>>kOhm</label>
+				<input type="radio" name="runit" value="1000" <?php echo (file_get_contents("runit.log") == 1000) ? "checked" : "";?>>&#x3A8</label>
 			<label>
-				<input type="radio" name="runit" value="1000000" <?php echo (file_get_contents("runit.log") == 1000000) ? "checked" : "";?>>MOhm</label>
+				<input type="radio" name="runit" value="1000000" <?php echo (file_get_contents("runit.log") == 1000000) ? "checked" : "";?>>&#x3A8</label>
 		<br>
 		<label>Volage (V):<br>
 			<input type="text" name="voltage" value=<?php echo file_get_contents("voltage.log");?>></label><br>
