@@ -74,11 +74,12 @@
 
 			// Save values
 			file_put_contents(detector.log, $detector);
-			file_put_contents(wlunit.log, wlunit);
-			file_put_contents(wavelength.log, wavelength);
-			file_put_contents(runit.log, runit);
-			file_put_contents(vunit.log, vunit);
-			file_put_contents(voltage.log, voltage);
+			file_put_contents(wlunit.log, $wlunit);
+			file_put_contents(wavelength.log, $wavelength);
+			file_put_contents(runit.log, $runit);
+			file_put_contents(resistance.log, $resistance);
+			file_put_contents(vunit.log, $vunit);
+			file_put_contents(voltage.log, $voltage);
 			
 			// Perform linear interpolation
 			$i = 0;
