@@ -112,7 +112,7 @@
 				exit;
 			}
 			
-       		// Calculate the power
+       			// Calculate the power
 			$power = $voltage / $resistance / $responsivity;
 			
 			// Print power
@@ -126,9 +126,9 @@
 				$result=number_format($power * 1000000000, 3) . " nW";
 			
 			file_put_contents("result.log", $result);
+			header('Location: https://diode.lapping.ch');
+  			exit;
 		}
-		header('Location: https://diode.lapping.ch');
-  		exit;
  	?>
 </body>
 </html>
