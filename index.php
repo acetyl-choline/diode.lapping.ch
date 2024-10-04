@@ -118,7 +118,7 @@
 			<label>
 				<input type="radio" name="wlunit" value="1" <?php echo (file_get_contents("wlunit.log") == 1) ? "checked" : "";?>>nm</label>
 			<label>
-				<input type="radio" name="wlunit" value="1000" <?php echo (file_get_contents("wlunit.log") == 1000) ? "checked" : "";?>>um</label>
+				<input type="radio" name="wlunit" value="1000" <?php echo (file_get_contents("wlunit.log") == 1000) ? "checked" : "";?>>&#x3BCm</label>
 		<br>
 		<label>Load resistance:<br>
 			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
