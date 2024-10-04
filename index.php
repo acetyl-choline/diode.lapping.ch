@@ -26,13 +26,20 @@
 			$voltage = floatval($_POST["voltage"]);
 
 			// Save values
+			//touch first because it might not exist
+			touch("detector.log");
 			file_put_contents("detector.log", $detector);
+			touch("wlunit.log");
 			file_put_contents("wlunit.log", $wlunit);
+			touch("wavelength.log");
 			file_put_contents("wavelength.log", $wavelength);
+			touch("runit.log");
 			file_put_contents("runit.log", $runit);
 			touch("resistance.log");
 			file_put_contents("resistance.log", $resistance);
+			touch("vunit.log");
 			file_put_contents("vunit.log", $vunit);
+			touch("voltage.log");
 			file_put_contents("voltage.log", $voltage);
 
 			$wavelength = $wavelength * $wlunit;
