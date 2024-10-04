@@ -49,7 +49,6 @@
         <input type="submit" value="Calculate Power">
     </form>
 	<?php echo file_get_contents("result.log");?>
- 	?>
 	 <script>
 		if (window.location.href.indexOf("POST") !== -1) {
   const detector = document.getElementById("detector").value;
