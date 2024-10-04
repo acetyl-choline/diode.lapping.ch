@@ -15,40 +15,7 @@
         }
     </style>
 </head>
-<body>
-    <h1>Calculate Power</h1>
-    <form action="" method="post">
-		<label>Detector:</label><br>
-		<select id="detector" name="detector">
-			<option value="det10a">DET10A (200 - 1100 nm)</option>  
-			<option value="det36a" selected>DET36A (350 - 1100 nm)</option>
-			<option value="det100a">DET100A (320 - 1100 nm)</option>
-		</select><br><br>
-		<label>Wavelength:<br>
-			<input type="text" name="wavelength" value=<?php echo file_get_contents("wavelength.log");?>></label><br>
-			<label>
-				<input type="radio" name="wlunit" value="1" <?php echo (file_get_contents("wlunit.log") == 1) ? "checked" : "";?>>nm</label>
-			<label>
-				<input type="radio" name="wlunit" value="1000" <?php echo (file_get_contents("wlunit.log") == 1000) ? "checked" : "";?>>um</label>
-		<br>
-		<label>Load resisance:<br>
-			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
-			<label>
-				<input type="radio" name="runit" value="1" <?php echo (file_get_contents("runit.log") == 1) ? "checked" : "";?>>&#x3A9</label>
-			<label>
-				<input type="radio" name="runit" value="1000" <?php echo (file_get_contents("runit.log") == 1000) ? "checked" : "";?>>k&#x3A9</label>
-			<label>
-				<input type="radio" name="runit" value="1000000" <?php echo (file_get_contents("runit.log") == 1000000) ? "checked" : "";?>>M&#x3A9</label>
-		<br>
-		<label>Volage:<br>
-			<input type="text" name="voltage" value=<?php echo file_get_contents("voltage.log");?>></label><br>
-	    		<label>
-				<input type="radio" name="vunit" value="1000" <?php echo (file_get_contents("vunit.log") == 1000) ? "checked" : "";?>>mV</label>
-			<label>
-				<input type="radio" name="vunit" value="1" <?php echo (file_get_contents("vunit.log") == 1) ? "checked" : "";?>>V</label><br><br>
-        <input type="submit" value="Calculate Power">
-    </form>
-	<?php
+<?php
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$detector = $_POST["detector"];
 			$wlunit = floatval($_POST["wlunit"]);
@@ -128,6 +95,42 @@
 			// header('Location: https://diode.lapping.ch');
   			// exit;
 		}
- 	echo file_get_contents("result.log");?>
+		?>
+<body>
+    <h1>Calculate Power</h1>
+    <form action="" method="post">
+		<label>Detector:</label><br>
+		<select id="detector" name="detector">
+			<option value="det10a">DET10A (200 - 1100 nm)</option>  
+			<option value="det36a" selected>DET36A (350 - 1100 nm)</option>
+			<option value="det100a">DET100A (320 - 1100 nm)</option>
+		</select><br><br>
+		<label>Wavelength:<br>
+			<input type="text" name="wavelength" value=<?php echo file_get_contents("wavelength.log");?>></label><br>
+			<label>
+				<input type="radio" name="wlunit" value="1" <?php echo (file_get_contents("wlunit.log") == 1) ? "checked" : "";?>>nm</label>
+			<label>
+				<input type="radio" name="wlunit" value="1000" <?php echo (file_get_contents("wlunit.log") == 1000) ? "checked" : "";?>>um</label>
+		<br>
+		<label>Load resisance:<br>
+			<input type="text" name="resistance" value=<?php echo file_get_contents("resistance.log");?>></label><br>
+			<label>
+				<input type="radio" name="runit" value="1" <?php echo (file_get_contents("runit.log") == 1) ? "checked" : "";?>>&#x3A9</label>
+			<label>
+				<input type="radio" name="runit" value="1000" <?php echo (file_get_contents("runit.log") == 1000) ? "checked" : "";?>>k&#x3A9</label>
+			<label>
+				<input type="radio" name="runit" value="1000000" <?php echo (file_get_contents("runit.log") == 1000000) ? "checked" : "";?>>M&#x3A9</label>
+		<br>
+		<label>Volage:<br>
+			<input type="text" name="voltage" value=<?php echo file_get_contents("voltage.log");?>></label><br>
+	    		<label>
+				<input type="radio" name="vunit" value="1000" <?php echo (file_get_contents("vunit.log") == 1000) ? "checked" : "";?>>mV</label>
+			<label>
+				<input type="radio" name="vunit" value="1" <?php echo (file_get_contents("vunit.log") == 1) ? "checked" : "";?>>V</label><br><br>
+        <input type="submit" value="Calculate Power">
+    </form>
+	
+ 	<?php
+	echo file_get_contents("result.log");?>
 </body>
 </html>
