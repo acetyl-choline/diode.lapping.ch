@@ -49,86 +49,89 @@
         <input type="submit" value="Calculate Power">
     </form>
 	<?php echo file_get_contents("result.log");?>
-	<?php
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			$detector = $_POST["detector"];
-			$wlunit = floatval($_POST["wlunit"]);
-			$wavelength = floatval($_POST["wavelength"]);
-			$runit = floatval($_POST["runit"]);
-			$resistance = floatval($_POST["resistance"]);
-			$vunit = floatval($_POST["vunit"]);
-			$voltage = floatval($_POST["voltage"]);
-
-			// Save values
-			file_put_contents("detector.log", $detector);
-			file_put_contents("wlunit.log", $wlunit);
-			file_put_contents("wavelength.log", $wavelength);
-			file_put_contents("runit.log", $runit);
-			file_put_contents("resistance.log", $resistance);
-			file_put_contents("vunit.log", $vunit);
-			file_put_contents("voltage.log", $voltage);
-
-			$wavelength = $wavelength * $wlunit;
-			$resistance = $resistance * $runit;
-			$voltage = $voltage / $vunit;
-			
-			// Import csv
-			$csvFile = $detector . ".csv";
-			$data = array_map('str_getcsv', file($csvFile));
-			$xValues = [];
-			$yValues = [];
-			foreach ($data as $row) {
-				$xValues[] = floatval($row[0]);
-				$yValues[] = floatval($row[1]);
-			}
-			
-			// Perform spline interpolation
-			//$spline = new Splines($xValues, $yValues);
-			//$responsivity = $spline->interpolate($wavelength);
-			
-			// Perform linear interpolation
-			$i = 0;
-			$responsivity = -1;
-			foreach ($xValues as $wltable) {
-				if ($i == 0 && $wavelength < $wltable) {
-					break;
-				}
-				else {
-					if ($wavelength == $wltable) {
-						$responsivity = $yValues[$i];
-						break;
-					}
-					elseif ($wavelength < $wltable) {
-						$responsivity = ($yValues[$i+1] - $yValues[$i]) / ($xValues[$i+1] - $xValues[$i]) * ($wavelength - $xValues[$i]) + $yValues[i];
-						break;
-					}
-					else {
-						$i++;
-					}
-				}
-			}
-			if ($responsivity == -1) {
-				echo "Invalid wavelength";
-				exit;
-			}
-			
-       			// Calculate the power
-			$power = $voltage / $resistance / $responsivity;
-			
-			// Print power
-			if ($power >= 1)
-				$result=number_format($power, 3) . " W";
-			elseif ($power >= 0.001)
-				$result=number_format($power * 1000, 3) . " mW";
-			elseif ($power >= 0.000001)
-				$result=number_format($power * 1000000, 3) . " &#x3BCW";
-			else
-				$result=number_format($power * 1000000000, 3) . " nW";
-			
-			file_put_contents("result.log", $result);
-			header('Location: https://diode.lapping.ch');
-  			exit;
-		}
  	?>
+	 <script>
+		if (window.location.href.indexOf("POST") !== -1) {
+  const detector = document.getElementById("detector").value;
+  const wlunit = parseFloat(document.getElementById("wlunit").value);
+  const wavelength = parseFloat(document.getElementById("wavelength").value);
+  const runit = parseFloat(document.getElementById("runit").value);
+  const resistance = parseFloat(document.getElementById("resistance").value);
+  const vunit = parseFloat(document.getElementById("vunit").value);
+  const voltage = parseFloat(document.getElementById("voltage").value);
+
+  // Save values
+  localStorage.setItem("detector", detector);
+  localStorage.setItem("wlunit", wlunit);
+  localStorage.setItem("wavelength", wavelength);
+  localStorage.setItem("runit", runit);
+  localStorage.setItem("resistance", resistance);
+  localStorage.setItem("vunit", vunit);
+  localStorage.setItem("voltage", voltage);
+
+  const wavelengthInNm = wavelength * wlunit;
+  const resistanceInOhm = resistance * runit;
+  const voltageInV = voltage / vunit;
+
+  // Import csv
+  const csvFile = `${detector}.csv`;
+  fetch(csvFile)
+    .then(response => response.text())
+    .then(data => {
+      const rows = data.trim().split("\n");
+      const xValues = [];
+      const yValues = [];
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i].split(",");
+        xValues.push(parseFloat(row[0]));
+        yValues.push(parseFloat(row[1]));
+      }
+
+      // Perform linear interpolation
+      let i = 0;
+      let responsivity = -1;
+      while (i < xValues.length) {
+        if (i === 0 && wavelengthInNm < xValues[i]) {
+          break;
+        } else {
+          if (wavelengthInNm === xValues[i]) {
+            responsivity = yValues[i];
+            break;
+          } else if (wavelengthInNm < xValues[i]) {
+            responsivity =
+              ((yValues[i + 1] - yValues[i]) / (xValues[i + 1] - xValues[i])) *
+                (wavelengthInNm - xValues[i]) +
+              yValues[i];
+            break;
+          } else {
+            i++;
+          }
+        }
+      }
+      if (responsivity === -1) {
+        alert("Invalid wavelength");
+        return;
+      }
+
+      // Calculate the power
+      const power = voltageInV / resistanceInOhm / responsivity;
+
+      // Print power
+      let result;
+      if (power >= 1) {
+        result = `${power.toFixed(3)} W`;
+      } else if (power >= 0.001) {
+        result = `${(power * 1000).toFixed(3)} mW`;
+      } else if (power >= 0.000001) {
+        result = `${(power * 1000000).toFixed(3)} \u03BCW`;
+      } else {
+        result = `${(power * 1000000000).toFixed(3)} nW`;
+      }
+
+      localStorage.setItem("result", result);
+      window.location.href = "https://diode.lapping.ch";
+    });
+}
+		</script>
 </body>
 </html>
