@@ -109,11 +109,11 @@
     <form action="" method="post">
 		<label>Detector:</label><br>
 		<select id="detector" name="detector">
-			<option value="det10a">DET10A (200 - 1100 nm)</option>  
-			<option value="det36a" selected>DET36A (350 - 1100 nm)</option>
-			<option value="det100a">DET100A (320 - 1100 nm)</option>
-			<option value="det01cfc">DET01CFC (800 - 1700 nm)</option>
-			<option value="det08c">DET08C (800 - 1700 nm)</option>
+			<option value="det10a" <?php echo (file_get_contents("detector.log") == "det10a") ? "selected" : "";?>>DET10A (200 - 1100 nm)</option>  
+			<option value="det36a" <?php echo (file_get_contents("detector.log") == "det36a") ? "selected" : "";?>>DET36A (350 - 1100 nm)</option>
+			<option value="det100a" <?php echo (file_get_contents("detector.log") == "det100a") ? "selected" : "";?>>DET100A (320 - 1100 nm)</option>
+			<option value="det01cfc" <?php echo (file_get_contents("detector.log") == "det01cfc") ? "selected" : "";?>>DET01CFC (800 - 1700 nm)</option>
+			<option value="det08c" <?php echo (file_get_contents("detector.log") == "det08c") ? "selected" : "";?>>DET08C (800 - 1700 nm)</option>
 		</select><br><br>
 		<label>Wavelength:<br>
 			<input type="text" name="wavelength" value=<?php echo file_get_contents("wavelength.log");?>></label><br>
