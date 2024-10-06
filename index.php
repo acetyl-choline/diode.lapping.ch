@@ -112,6 +112,8 @@
 			<option value="det10a">DET10A (200 - 1100 nm)</option>  
 			<option value="det36a" selected>DET36A (350 - 1100 nm)</option>
 			<option value="det100a">DET100A (320 - 1100 nm)</option>
+			<option value="det01cfc">DET01CFC (800 - 1700 nm)</option>
+			<option value="det08c">DET08C (800 - 1700 nm)</option>
 		</select><br><br>
 		<label>Wavelength:<br>
 			<input type="text" name="wavelength" value=<?php echo file_get_contents("wavelength.log");?>></label><br>
