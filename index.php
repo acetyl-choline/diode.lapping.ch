@@ -153,7 +153,7 @@
  	<?php
 	echo file_get_contents("result.log");
 	// print shot noise with header
-	echo "<br><br>Shot noise: <br>";
+	echo "<br><br>Shot noise level (one-sided PSD): <br>";
 	echo file_get_contents("shotNoise.log");
 	?>
 </body>
