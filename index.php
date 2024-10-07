@@ -102,6 +102,16 @@
 			file_put_contents("result.log", $result);
 			// header('Location: https://diode.lapping.ch');
   			// exit;
+			
+			// calculate the shot noise in dBc/Hz
+			$current = $voltage / $resistance;
+			$shotNoise = 2 * $current * 1.6e-19;
+			$shotNoise = 10 * log10($shotNoise);
+			if ($shotNoise >= 0)
+				$shotNoise = number_format($shotNoise, 3) . " dBc/Hz";
+			else
+				$shotNoise = number_format($shotNoise, 3) . " dBc/Hz";
+			file_put_contents("shotNoise.log", $shotNoise);
 		}
 		?>
 <body>
@@ -141,6 +151,10 @@
     </form>
 	
  	<?php
-	echo file_get_contents("result.log");?>
+	echo file_get_contents("result.log");
+	// print shot noise with header
+	echo "<br><br>Shot noise: <br>";
+	echo file_get_contents("shotNoise.log");
+	?>
 </body>
 </html>
